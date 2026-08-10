@@ -1,0 +1,104 @@
+{% extends "portfolio/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% translate "About me" %} | Daniel Párraga{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'portfolio/css/about.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<section class="about">
+
+    <div class="container">
+
+        <!-- PRESENTACIÓN -->
+        <div class="about__intro">
+
+            <div class="about__info">
+
+                <h1 class="about__name text-bold">
+                    {{ portfolio_config.nombre }}
+                </h1>
+
+                <p class="about__role text-bold">
+                    {{ portfolio_config.rol }}
+                </p>
+
+                <p class="about__description">
+                    {{ portfolio_config.sobre_mi_parrafo_1 }}
+                </p>
+
+                <p class="about__description">
+                    {{ portfolio_config.sobre_mi_parrafo_2 }}
+                </p>
+
+            </div>
+
+            <div class="about__photo">
+
+                {% if portfolio_config.foto %}
+                <img
+                        class="about__photo-image"
+                        src="{{ portfolio_config.foto.url }}"
+                        alt="{{ portfolio_config.nombre }}">
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <!-- TECNOLOGÍAS -->
+        <section class="about-technologies">
+
+            <h2 class="about-technologies__title text-bold">
+                {% translate "Technologies" %}
+            </h2>
+
+            <div class="about-technologies__divider"></div>
+
+            <div class="about-technologies__grid">
+
+                {% for technology in technologies %}
+
+                <article class="about-technology">
+
+                    <div class="about-technology__content">
+
+                        <img
+                                class="about-technology__icon"
+                                src="{{ technology.icono.url }}"
+                                alt="{{ technology.nombre }}">
+
+                        <span class="about-technology__name">
+            {{ technology.nombre }}
+        </span>
+
+                    </div>
+
+                    <div class="about-technology__tooltip">
+                        {{ technology.nivel }}
+                    </div>
+
+                </article>
+
+                {% empty %}
+
+                <p class="about-technologies__empty">
+                    {% translate "No technologies available." %}
+                </p>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    </div>
+
+</section>
+
+{% endblock %}

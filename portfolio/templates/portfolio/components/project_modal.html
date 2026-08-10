@@ -1,0 +1,160 @@
+{% load static i18n %}
+
+<div
+        class="project-modal"
+        id="project-modal">
+
+    <div class="project-modal__dialog">
+
+        <header class="project-modal__header">
+
+            <h2 class="project-modal__title text-bold">
+
+            </h2>
+
+            <button
+                    class="project-modal__close"
+                    type="button"
+                    aria-label="{% translate 'Close' %}">
+
+                ✕
+
+            </button>
+
+        </header>
+
+        <div class="project-viewer">
+
+            <button
+                    class="project-viewer__arrow project-viewer__arrow--left"
+                    type="button"
+                    aria-label="{% translate 'Previous image' %}">
+
+                ❮
+
+            </button>
+
+            <div class="project-viewer__content">
+
+                <img
+                        class="project-viewer__image"
+                        src=""
+                        alt="">
+
+                <video
+                        class="project-viewer__video"
+                        controls
+                        playsinline>
+
+                </video>
+
+            </div>
+
+            <button
+                    class="project-viewer__arrow project-viewer__arrow--right"
+                    type="button"
+                    aria-label="{% translate 'Next image' %}">
+
+                ❯
+
+            </button>
+
+            <button
+                    class="project-viewer__close"
+                    type="button"
+                    aria-label="{% translate 'Close' %}">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div class="project-modal__content">
+
+            <div class="project-modal__gallery">
+
+                <button
+                        class="project-modal__gallery-arrow project-modal__gallery-arrow--left"
+                        type="button"
+                        aria-label="{% translate 'Previous image' %}">
+
+                    ❮
+
+                </button>
+
+                <div class="project-modal__gallery-viewport">
+
+                    <div class="project-modal__gallery-track">
+
+                    </div>
+
+                </div>
+
+                <button
+                        class="project-modal__gallery-arrow project-modal__gallery-arrow--right"
+                        type="button"
+                        aria-label="{% translate 'Next image' %}">
+
+                    ❯
+
+                </button>
+
+            </div>
+
+            <section class="project-modal__section">
+
+                <h3 class="project-modal__section-title text-bold">
+
+                    {% translate "Description" %}
+
+                </h3>
+
+                <p class="project-modal__description">
+
+                </p>
+
+            </section>
+
+            <section class="project-modal__section">
+
+                <h3 class="project-modal__section-title text-bold">
+
+                    {% translate "Technologies" %}
+
+                </h3>
+
+                <div class="project-modal__technologies">
+
+
+                </div>
+
+            </section>
+
+            <footer class="project-modal__footer">
+
+                <a
+                        class="project-modal__button project-modal__demo"
+                        target="_blank"
+                        rel="noopener">
+
+                    {% translate "Demo" %}
+
+                </a>
+
+                <a
+                        class="project-modal__button project-modal__repository"
+                        target="_blank"
+                        rel="noopener">
+
+                    {% translate "Repository" %}
+
+                </a>
+
+            </footer>
+
+        </div>
+
+    </div>
+
+</div>

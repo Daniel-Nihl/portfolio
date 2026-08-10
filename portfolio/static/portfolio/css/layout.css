@@ -1,0 +1,23 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    width: 100%;
+}
+
+section {
+    width: 100%;
+}
+
+.container {
+    width: min(1400px, calc(100% - 64px));
+    margin: 0 auto;
+}
+
+.page {
+    width: 100%;
+}

@@ -1,0 +1,143 @@
+{% extends "portfolio/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% translate "Home" %}{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'portfolio/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'portfolio/css/portfolio.css' %}">
+<link rel="stylesheet" href="{% static 'portfolio/css/project_modal.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="portfolio-background">
+
+    <video
+            class="portfolio-background__video"
+            autoplay
+            muted
+            loop
+            playsinline
+            disablepictureinpicture
+            disableremoteplayback>
+
+        {% if portfolio_config and portfolio_config.video_hero %}
+        <source
+                src="{{ portfolio_config.video_hero.url }}"
+                type="video/mp4">
+        {% endif %}
+
+    </video>
+
+    <div class="portfolio-background__overlay"></div>
+
+    <div class="portfolio-background__effects"></div>
+
+</div>
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero__content">
+
+            <div class="hero__logo"></div>
+
+            <p class="hero__subtitle text-bold">
+                {{ portfolio_config.rol }}
+            </p>
+
+            <h1 class="hero__title text-bold">
+                {{ portfolio_config.nombre }}
+            </h1>
+
+            <p class="hero__description text-bold">
+                {{ portfolio_config.texto_presentacion }}
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="hero__divider"></div>
+
+</section>
+
+{% for category in categories %}
+
+<section class="project-category reveal">
+
+    <div class="container">
+
+        <div class="project-category__header">
+
+            <h2 class="project-category__title text-bold">
+                {{ category.nombre }}
+            </h2>
+
+        </div>
+
+        <div class="project-category__grid">
+
+            {% for project in category.projects.all %}
+
+            <article
+                    class="project-card"
+                    data-project-id="{{ project.id }}">
+
+                <div class="project-card__media">
+
+                    <img
+                            class="project-card__media-element"
+                            src="{{ project.miniatura.url }}"
+                            alt="{{ project.titulo }}">
+
+                    <div class="project-card__gradient"></div>
+
+                    <h3 class="project-card__title text-bold">
+                        {{ project.titulo }}
+                    </h3>
+
+                </div>
+
+            </article>
+
+            {% empty %}
+
+            <p class="project-category__empty">
+                {% translate "No projects in this category." %}
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endfor %}
+
+{% include "portfolio/components/project_modal.html" %}
+
+{% endblock %}
+
+{% block extra_js %}
+
+{{ projects_json|json_script:"projects-data" }}
+
+<script>
+    const projects = JSON.parse(
+        document.getElementById("projects-data").textContent
+    );
+</script>
+
+<script src="{% static 'portfolio/js/hero.js' %}"></script>
+<script src="{% static 'portfolio/js/modal.js' %}"></script>
+<script src="{% static 'portfolio/js/mediaViewer.js' %}"></script>
+<script src="{% static 'portfolio/js/home.js' %}"></script>
+
+{% endblock %}

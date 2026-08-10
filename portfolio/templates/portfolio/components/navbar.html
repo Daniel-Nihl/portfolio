@@ -1,0 +1,86 @@
+{% load static i18n %}
+
+<header class="navbar">
+
+    <div class="container">
+
+        <div class="navbar__content">
+
+            <div class="navbar__left">
+
+                <a href="{% url 'home' %}" class="navbar__logo" aria-label="{% translate 'Home' %}">
+
+                    <img class="navbar__logo-image" src="{% static 'portfolio/img/DP_Logo.svg' %}" alt="Daniel Párraga">
+
+                </a>
+
+                <nav class="navbar__nav text-bold">
+
+                    <a href="{% url 'home' %}">
+                        {% translate "Portfolio" %}
+                    </a>
+
+                    <a href="{% url 'about' %}">
+                        {% translate "About me" %}
+                    </a>
+
+                    <a href="{% url 'contact' %}">
+                        {% translate "Contact" %}
+                    </a>
+
+                </nav>
+
+            </div>
+
+            <div class="navbar__language">
+
+                <button
+                        class="navbar__language-button text-bold"
+                        type="button"
+                        aria-expanded="false">
+
+                    {% translate "Language" %}
+                    <span class="navbar__language-arrow">▼</span>
+
+                </button>
+
+                <div class="navbar__language-menu">
+
+                    <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <input type="hidden" name="language" value="es">
+
+                        <button type="submit" class="navbar__language-option">
+                            🇪🇸 {% translate "Spanish" %}
+                        </button>
+                    </form>
+
+                    <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <input type="hidden" name="language" value="en">
+
+                        <button type="submit" class="navbar__language-option">
+                            🇬🇧 {% translate "English" %}
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+
+            <button
+                    class="navbar__toggle"
+                    type="button"
+                    aria-label="{% translate 'Open menu' %}">
+
+                ☰
+
+            </button>
+
+        </div>
+
+    </div>
+
+</header>

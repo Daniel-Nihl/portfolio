@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Portfolio{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'portfolio/css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'portfolio/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'portfolio/css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'portfolio/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'portfolio/css/footer.css' %}">
+
+    {% block extra_css %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+{% include "portfolio/components/navbar.html" %}
+
+<main>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+{% include "portfolio/components/footer.html" %}
+
+<script src="{% static 'portfolio/js/navbar.js' %}"></script>
+<script src="{% static 'portfolio/js/footer.js' %}"></script>
+
+{% block extra_js %}
+{% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Verdana, sans-serif;
+}
+
+.text-bold {
+    font-weight: 900;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity .6s ease, transform .6s ease;
+}
+
+.reveal--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
