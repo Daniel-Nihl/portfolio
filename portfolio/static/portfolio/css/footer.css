@@ -62,3 +62,17 @@
     align-items: center;
     height: 100%;
 }
+
+@media (max-width: 600px) {
+
+    .footer__contact,
+    .footer__top {
+        padding: 0 .5rem;
+        font-size: .85rem;
+    }
+
+    .footer__top {
+        gap: .35rem;
+    }
+
+}

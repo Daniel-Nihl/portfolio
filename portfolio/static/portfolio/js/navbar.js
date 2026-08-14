@@ -103,3 +103,115 @@ if (language) {
     });
 
 }
+
+const navbarToggle = document.querySelector(".navbar__toggle");
+
+if (navbarToggle) {
+
+    navbarToggle.addEventListener("click", () => {
+
+        const opened = navbar.classList.toggle("navbar--menu-open");
+
+        navbarToggle.textContent = opened ? "✕" : "☰";
+
+        navbarToggle.setAttribute(
+            "aria-expanded",
+            opened ? "true" : "false"
+        );
+
+    });
+
+}
+
+const navbarLinks = document.querySelectorAll(".navbar__nav a");
+
+navbarLinks.forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navbar.classList.remove("navbar--menu-open");
+
+        if (navbarToggle) {
+            navbarToggle.textContent = "☰";
+            navbarToggle.setAttribute("aria-expanded", "false");
+        }
+
+    });
+
+});
+
+// ==================================================
+// VIEW MODE
+// ==================================================
+
+const VIEW_MODE_KEY = "portfolio-view-mode";
+
+const desktopViewButton = document.querySelector(
+    ".navbar__view-button--desktop"
+);
+
+const mobileViewButton = document.querySelector(
+    ".navbar__view-button--mobile"
+);
+
+function updateViewModeButtons(mobile) {
+
+    desktopViewButton?.classList.toggle(
+        "navbar__view-button--active",
+        !mobile
+    );
+
+    mobileViewButton?.classList.toggle(
+        "navbar__view-button--active",
+        mobile
+    );
+
+    desktopViewButton?.setAttribute(
+        "aria-pressed",
+        String(!mobile)
+    );
+
+    mobileViewButton?.setAttribute(
+        "aria-pressed",
+        String(mobile)
+    );
+
+}
+
+function setViewMode(mode, save = true) {
+
+    const mobile = mode === "mobile";
+
+    document.body.classList.toggle(
+        "portfolio--mobile-preview",
+        mobile
+    );
+
+    updateViewModeButtons(mobile);
+
+    if (save) {
+        localStorage.setItem(
+            VIEW_MODE_KEY,
+            mobile ? "mobile" : "desktop"
+        );
+    }
+
+}
+
+const savedViewMode = localStorage.getItem(VIEW_MODE_KEY);
+
+setViewMode(
+    savedViewMode === "mobile" ? "mobile" : "desktop",
+    false
+);
+
+
+desktopViewButton?.addEventListener(
+    "click",
+    () => setViewMode("desktop")
+);
+
+mobileViewButton?.addEventListener(
+    "click",
+    () => setViewMode("mobile")
+);

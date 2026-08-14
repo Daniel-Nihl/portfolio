@@ -98,6 +98,10 @@
     transform: scale(1.03);
 }
 
+/* =========================
+   MOBILE PREVIEW
+   ========================= */
+
 @media (max-width: 700px) {
 
     .contact {
@@ -118,4 +122,47 @@
         min-width: 0;
     }
 
+    .contact__title {
+        font-size: clamp(2.5rem, 11vw, 4rem);
+    }
+
+    .contact__subtitle {
+        font-size: 1rem;
+    }
+
+    .contact__input,
+    .contact__textarea {
+        font-size: 1rem;
+    }
+}
+
+body.portfolio--mobile-preview .contact {
+    padding: 4rem 0 5rem;
+}
+
+body.portfolio--mobile-preview .contact__subtitle {
+    font-size: 1rem;
+}
+
+body.portfolio--mobile-preview .contact__row {
+    grid-template-columns: 1fr;
+    gap: 0;
+}
+
+body.portfolio--mobile-preview .contact__submit {
+    width: 100%;
+    min-width: 0;
+}
+
+body.portfolio--mobile-preview .contact__title {
+    font-size: clamp(2.3rem, 10vw, 3.2rem);
+    line-height: 1;
+    max-width: 100%;
+    overflow-wrap: break-word;
+}
+
+body.portfolio--mobile-preview .contact__subtitle {
+    font-size: 1rem;
+    line-height: 1.5;
+    overflow-wrap: break-word;
 }

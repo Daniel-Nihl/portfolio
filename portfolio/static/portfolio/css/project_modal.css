@@ -321,3 +321,253 @@
 .project-viewer__close:hover{
     background:var(--color-accent-red);
 }
+
+@media (max-width: 768px) {
+
+    .project-modal {
+        padding: .75rem;
+        align-items: stretch;
+    }
+
+    .project-modal__dialog {
+        width: 100%;
+        max-height: calc(100svh - 1.5rem);
+        border-radius: 10px;
+    }
+
+    .project-modal__header {
+        padding: 1rem 1rem;
+    }
+
+    .project-modal__title {
+        font-size: 1.3rem;
+        line-height: 1.2;
+        padding-right: .5rem;
+    }
+
+    .project-modal__close {
+        width: 38px;
+        height: 38px;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+    }
+
+    .project-modal__content {
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+
+    .project-modal__gallery {
+        grid-template-columns: auto 1fr auto;
+        gap: .5rem;
+    }
+
+    .project-modal__gallery-arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 1.25rem;
+    }
+
+    .project-modal__gallery-page {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, auto);
+        gap: .5rem;
+        padding: .5rem;
+    }
+
+    .project-modal__gallery-item {
+        aspect-ratio: 16 / 9;
+    }
+
+    .project-modal__section-title {
+        font-size: 1.1rem;
+    }
+
+    .project-modal__description {
+        font-size: .95rem;
+        line-height: 1.7;
+    }
+
+    .project-modal__technologies {
+        gap: .5rem;
+    }
+
+    .project-modal__technology {
+        padding: .45rem .7rem;
+        font-size: .9rem;
+    }
+
+    .project-modal__technology img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .project-modal__footer {
+        flex-direction: column;
+        gap: .75rem;
+    }
+
+    .project-modal__button {
+        width: 100%;
+        min-width: 0;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .project-viewer {
+        gap: .5rem;
+    }
+
+    .project-viewer__image,
+    .project-viewer__video {
+        max-width: 90vw;
+        max-height: 80svh;
+    }
+
+    .project-viewer__arrow {
+        width: 42px;
+        height: 42px;
+        font-size: 1.3rem;
+    }
+
+    .project-viewer__arrow--left {
+        left: .75rem;
+    }
+
+    .project-viewer__arrow--right {
+        right: .75rem;
+    }
+
+    .project-viewer__close {
+        top: .75rem;
+        right: .75rem;
+        width: 42px;
+        height: 42px;
+        font-size: 1.25rem;
+    }
+
+}
+
+/* =========================
+   MOBILE PREVIEW
+   ========================= */
+
+body.portfolio--mobile-preview .project-modal {
+    width: var(--mobile-preview-width);
+    left: 50%;
+    right: auto;
+
+    transform: translateX(-50%);
+    padding: .75rem;
+}
+
+body.portfolio--mobile-preview .project-modal__dialog {
+    width: 100%;
+    max-height: calc(100svh - 1.5rem);
+    border-radius: 10px;
+}
+
+body.portfolio--mobile-preview .project-modal__header {
+    padding: 1rem;
+}
+
+body.portfolio--mobile-preview .project-modal__title {
+    font-size: 1.3rem;
+    line-height: 1.2;
+}
+
+body.portfolio--mobile-preview .project-modal__close {
+    width: 38px;
+    height: 38px;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+body.portfolio--mobile-preview .project-modal__content {
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+body.portfolio--mobile-preview .project-modal__gallery {
+    grid-template-columns: auto 1fr auto;
+    gap: .5rem;
+}
+
+body.portfolio--mobile-preview .project-modal__gallery-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 1.25rem;
+}
+
+body.portfolio--mobile-preview .project-modal__gallery-page {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, auto);
+    gap: .5rem;
+    padding: .5rem;
+}
+
+body.portfolio--mobile-preview .project-modal__description {
+    font-size: .95rem;
+    line-height: 1.7;
+}
+
+body.portfolio--mobile-preview .project-modal__technologies {
+    gap: .5rem;
+}
+
+body.portfolio--mobile-preview .project-modal__technology {
+    padding: .45rem .7rem;
+    font-size: .9rem;
+}
+
+body.portfolio--mobile-preview .project-modal__technology img {
+    width: 20px;
+    height: 20px;
+}
+
+body.portfolio--mobile-preview .project-modal__footer {
+    flex-direction: column;
+    gap: .75rem;
+}
+
+body.portfolio--mobile-preview .project-modal__button {
+    width: 100%;
+    min-width: 0;
+}
+
+body.portfolio--mobile-preview .project-viewer {
+    width: var(--mobile-preview-width);
+    left: 50%;
+    right: auto;
+
+    transform: translateX(-50%);
+}
+
+body.portfolio--mobile-preview .project-viewer__image,
+body.portfolio--mobile-preview .project-viewer__video {
+    max-width: 90%;
+    max-height: 80svh;
+}
+
+body.portfolio--mobile-preview .project-viewer__arrow {
+    width: 42px;
+    height: 42px;
+    font-size: 1.3rem;
+}
+
+body.portfolio--mobile-preview .project-viewer__arrow--left {
+    left: .5rem;
+}
+
+body.portfolio--mobile-preview .project-viewer__arrow--right {
+    right: .5rem;
+}
+
+body.portfolio--mobile-preview .project-viewer__close {
+    top: .75rem;
+    right: .75rem;
+    width: 42px;
+    height: 42px;
+}
