@@ -22,14 +22,10 @@
             loop
             playsinline
             disablepictureinpicture
-            disableremoteplayback>
+            disableremoteplayback
 
-        {% if portfolio_config and portfolio_config.video_hero %}
-        <source
-                src="{{ portfolio_config.video_hero.url }}"
-                type="video/mp4">
-        {% endif %}
-
+            data-desktop-video="{% if portfolio_config and portfolio_config.video_hero %}{{ portfolio_config.video_hero.url }}{% endif %}"
+            data-mobile-video="{% if portfolio_config and portfolio_config.video_hero_mobile %}{{ portfolio_config.video_hero_mobile.url }}{% endif %}">
     </video>
 
     <div class="portfolio-background__overlay"></div>
@@ -136,6 +132,7 @@
 </script>
 
 <script src="{% static 'portfolio/js/hero.js' %}"></script>
+<script src="{% static 'portfolio/js/particles.js' %}"></script>
 <script src="{% static 'portfolio/js/modal.js' %}"></script>
 <script src="{% static 'portfolio/js/mediaViewer.js' %}"></script>
 <script src="{% static 'portfolio/js/home.js' %}"></script>

@@ -24,6 +24,12 @@ class PortfolioConfig(TranslatableModel):
         null=True,
     )
 
+    video_hero_mobile = models.FileField(
+        upload_to="portfolio/hero/",
+        blank=True,
+        null=True,
+    )
+
     class Meta:
         verbose_name = "Configuración del portfolio"
         verbose_name_plural = "Configuración del portfolio"

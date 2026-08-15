@@ -154,6 +154,52 @@ const mobileViewButton = document.querySelector(
     ".navbar__view-button--mobile"
 );
 
+const mobileMediaQuery = window.matchMedia(
+    "(max-width: 768px)"
+);
+
+
+// --------------------------------------------------
+// APPLY VIEW MODE
+// --------------------------------------------------
+
+function applyViewMode(mode) {
+
+    const mobile = mode === "mobile";
+
+    /*
+     * Guarda el modo actual en el <body>.
+     * hero.js utilizará este valor para saber qué vídeo cargar.
+     */
+    document.body.dataset.portfolioViewMode = mobile
+        ? "mobile"
+        : "desktop";
+
+
+    /*
+     * El viewport simulado solo se utiliza cuando estamos
+     * probando móvil desde una pantalla realmente grande.
+     *
+     * En un móvil real, el navegador ya está usando su
+     * viewport móvil y no queremos limitarlo artificialmente
+     * a 390px.
+     */
+    const isRealMobileViewport = mobileMediaQuery.matches;
+
+    document.body.classList.toggle(
+        "portfolio--mobile-preview",
+        mobile && !isRealMobileViewport
+    );
+
+
+    updateViewModeButtons(mobile);
+}
+
+
+// --------------------------------------------------
+// BUTTON STATE
+// --------------------------------------------------
+
 function updateViewModeButtons(mobile) {
 
     desktopViewButton?.classList.toggle(
@@ -175,36 +221,88 @@ function updateViewModeButtons(mobile) {
         "aria-pressed",
         String(mobile)
     );
-
 }
+
+
+// --------------------------------------------------
+// CHANGE VIEW MODE
+// --------------------------------------------------
 
 function setViewMode(mode, save = true) {
 
-    const mobile = mode === "mobile";
+    applyViewMode(mode);
 
-    document.body.classList.toggle(
-        "portfolio--mobile-preview",
-        mobile
-    );
 
-    updateViewModeButtons(mobile);
-
+    /*
+     * Guardar aquí significa que el usuario ha elegido
+     * manualmente el modo.
+     */
     if (save) {
+
         localStorage.setItem(
             VIEW_MODE_KEY,
-            mobile ? "mobile" : "desktop"
+            mode
         );
+
     }
+
+
+    /*
+     * hero.js puede estar ya inicializado en la página.
+     * Este evento permite cambiar el vídeo inmediatamente
+     * sin recargar.
+     */
+    document.dispatchEvent(
+        new CustomEvent("portfolioViewModeChanged", {
+            detail: {
+                mode: mode
+            }
+        })
+    );
 
 }
 
-const savedViewMode = localStorage.getItem(VIEW_MODE_KEY);
 
-setViewMode(
-    savedViewMode === "mobile" ? "mobile" : "desktop",
-    false
+// --------------------------------------------------
+// INITIAL MODE
+// --------------------------------------------------
+
+const savedViewMode = localStorage.getItem(
+    VIEW_MODE_KEY
 );
 
+
+if (savedViewMode === "mobile" || savedViewMode === "desktop") {
+
+    /*
+     * Existe una elección manual anterior.
+     * Tiene prioridad sobre el dispositivo.
+     */
+    setViewMode(savedViewMode, false);
+
+}
+else {
+
+    /*
+     * Primera visita:
+     * detectar automáticamente el viewport.
+     *
+     * Importante:
+     * NO guardamos este resultado en localStorage.
+     * Por tanto sigue siendo modo automático.
+     */
+    const automaticMode = mobileMediaQuery.matches
+        ? "mobile"
+        : "desktop";
+
+    setViewMode(automaticMode, false);
+
+}
+
+
+// --------------------------------------------------
+// MANUAL BUTTONS
+// --------------------------------------------------
 
 desktopViewButton?.addEventListener(
     "click",
@@ -214,4 +312,30 @@ desktopViewButton?.addEventListener(
 mobileViewButton?.addEventListener(
     "click",
     () => setViewMode("mobile")
+);
+
+
+// --------------------------------------------------
+// AUTOMATIC MODE + RESIZE
+// --------------------------------------------------
+
+mobileMediaQuery.addEventListener(
+    "change",
+    () => {
+
+        /*
+         * Si existe una elección manual, no hacemos nada.
+         */
+        if (localStorage.getItem(VIEW_MODE_KEY)) {
+            return;
+        }
+
+
+        const automaticMode = mobileMediaQuery.matches
+            ? "mobile"
+            : "desktop";
+
+        setViewMode(automaticMode, false);
+
+    }
 );

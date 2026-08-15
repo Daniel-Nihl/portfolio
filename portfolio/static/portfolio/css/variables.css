@@ -18,4 +18,21 @@
     --color-accent: #457B9D;
     --color-accent-dark: #1D3557;
 
+
+    /* Particles */
+
+    --particles-count: 100;
+    --particles-speed: 0.35;
+    --particles-direction-x: 3.00;
+    --particles-direction-y: 0.35;
+
+    --particles-size-min: 1px;
+    --particles-size-max: 3px;
+
+    --particles-opacity-min: 0.15;
+    --particles-opacity-max: 0.55;
+
+    --particles-color: 168, 218, 220;
+
 }
+

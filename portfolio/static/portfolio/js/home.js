@@ -3,6 +3,7 @@ const projectModal = document.querySelector("#project-modal");
 
 if (hero) {
     initHero();
+    initParticles();
 }
 
 if (projectModal) {
