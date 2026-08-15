@@ -1,0 +1,60 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    width: 100%;
+}
+
+section {
+    width: 100%;
+}
+
+.container {
+    width: min(1400px, calc(100% - 64px));
+    margin: 0 auto;
+}
+
+.page {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+
+    .container {
+        width: min(1400px, calc(100% - 40px));
+    }
+
+}
+
+/* =========================
+   MOBILE PREVIEW
+   ========================= */
+
+body.portfolio--mobile-preview main,
+body.portfolio--mobile-preview .footer {
+    width: var(--mobile-preview-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body.portfolio--mobile-preview .navbar {
+    width: var(--mobile-preview-width);
+    left: calc(50% - (var(--mobile-preview-width) / 2));
+}
+
+body.portfolio--mobile-preview .navbar .container {
+    width: 100%;
+}
+
+body.portfolio--mobile-preview .navbar__content {
+    width: 100%;
+}
+
+body.portfolio--mobile-preview .portfolio-background {
+    width: var(--mobile-preview-width);
+    left: calc(50% - (var(--mobile-preview-width) / 2));
+}

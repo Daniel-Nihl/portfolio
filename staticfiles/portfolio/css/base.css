@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Verdana, sans-serif;
+}
+
+.text-bold {
+    font-weight: 900;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity .6s ease, transform .6s ease;
+}
+
+.reveal--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================
+   MOBILE PREVIEW
+   ========================= */
+
+body.portfolio--mobile-preview {
+    background: #111;
+}
+
+body.portfolio--mobile-preview::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: var(--mobile-preview-width);
+    transform: translateX(-50%);
+    border-left: 1px solid rgba(255, 255, 255, .15);
+    border-right: 1px solid rgba(255, 255, 255, .15);
+    pointer-events: none;
+    z-index: 5000;
+}
