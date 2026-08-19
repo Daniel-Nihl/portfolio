@@ -170,8 +170,6 @@ function initializeGallery() {
 
 function loadPanel(panel, pageIndex) {
 
-    console.log("Cargando panel", panel, "pageIndex:", pageIndex, "normalizada:", normalizePage(pageIndex));
-
     panel.page = normalizePage(pageIndex);
 
     const firstMedia = panel.page * ITEMS_PER_PAGE;
@@ -235,8 +233,6 @@ function renderGallery() {
     if (!currentProject) {
             return;
         }
-
-    console.log("MEDIA:", currentProject.media);
 
     currentPage = normalizePage(currentPage);
 
@@ -347,8 +343,6 @@ function recycleBackward() {
 }
 
 function onGalleryTransitionEnd(event) {
-
-    console.log(panels.map(p => p.page));
 
     if (event.target !== galleryTrack) {
         return;
@@ -588,26 +582,6 @@ function initMediaViewer() {
 
     viewerImage = document.querySelector(".project-viewer__image");
     viewerVideo = document.querySelector(".project-viewer__video");
-
-    viewerVideo.addEventListener("seeking", () => {
-        console.log("SEEKING", viewerVideo.currentTime);
-    });
-
-    viewerVideo.addEventListener("seeked", () => {
-        console.log("SEEKED", viewerVideo.currentTime);
-    });
-
-    viewerVideo.addEventListener("timeupdate", () => {
-        console.log("TIME", viewerVideo.currentTime);
-    });
-
-    viewerVideo.addEventListener("loadedmetadata", () => {
-        console.log("DURATION", viewerVideo.duration);
-    });
-
-    viewerVideo.addEventListener("error", () => {
-        console.log(viewerVideo.error);
-    });
 
     viewerClose = document.querySelector(".project-viewer__close");
 

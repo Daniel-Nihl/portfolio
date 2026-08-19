@@ -50,20 +50,7 @@ function initModal() {
 
 function openModal(projectId) {
 
-    console.log("projects =", projects);
-    console.log("typeof projects =", typeof projects);
-    console.log("projectId =", projectId);
-    console.log("projects[projectId] =", projects[projectId]);
-    console.log("projects['1'] =", projects["1"]);
-
     currentProject = projects[projectId];
-
-    console.log("currentProject:", currentProject);
-    console.log("technologies:", currentProject.technologies);
-    console.log("Es array:", Array.isArray(currentProject.technologies));
-
-    console.log("PROJECT ID:", projectId);
-    console.log("CURRENT PROJECT:", currentProject);
 
     renderModal();
 
@@ -76,8 +63,6 @@ function openModal(projectId) {
 }
 
 function renderModal() {
-
-    console.log("renderModal ejecutado");
 
     titleElement.textContent = currentProject.title;
 
@@ -108,9 +93,6 @@ function renderModal() {
         technologiesElement.appendChild(item);
 
     }
-
-    console.log("demo =", JSON.stringify(currentProject.demo));
-    console.log("repository =", JSON.stringify(currentProject.repository));
 
     if (currentProject.demo?.trim()) {
 

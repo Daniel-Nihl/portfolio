@@ -30,7 +30,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 
 DEBUG = os.getenv(
     "DEBUG",
-    "True"
+    "False"
 ).lower() in ("true", "1", "yes")
 
 ALLOWED_HOSTS = [
@@ -55,6 +55,10 @@ SECURE_PROXY_SSL_HEADER = (
     "HTTP_X_FORWARDED_PROTO",
     "https",
 )
+
+SECURE_SSL_REDIRECT = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
 
 # Application definition
 
@@ -106,8 +110,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 
-if os.getenv("DATABASE_URL") and os.getenv("PGHOST"):
-
+if os.getenv("PGHOST"):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
@@ -118,9 +121,7 @@ if os.getenv("DATABASE_URL") and os.getenv("PGHOST"):
             "PORT": os.environ["PGPORT"],
         }
     }
-
 else:
-
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
