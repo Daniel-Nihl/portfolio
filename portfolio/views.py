@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.core.files.storage import default_storage
 from .models import Category, PortfolioConfig, Technology
 
 
@@ -50,9 +50,16 @@ def home(request):
                             else "image"
                         ),
                         "url": media.archivo.url,
-                        "thumbnail": (media.miniatura.url if media.miniatura else media.archivo.url),
+                        "thumbnail": (
+                            media.miniatura.url
+                            if media.miniatura
+                               and default_storage.exists(media.miniatura.name)
+                            else media.archivo.url
+                        ),
                     }
                     for media in project.media.all()
+                    if media.archivo
+                    and default_storage.exists(media.archivo.name)
                 ]
             }
 

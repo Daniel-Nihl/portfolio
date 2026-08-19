@@ -1,5 +1,7 @@
 from django.db import models
-
+from django.core.files.storage import default_storage
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 from parler.models import TranslatableModel, TranslatedFields
 
 
@@ -162,3 +164,83 @@ class ProjectMedia(models.Model):
 
     def __str__(self):
         return f"{self.proyecto} ({self.orden})"
+
+    def save(self, *args, **kwargs):
+
+        old_archivo = None
+        old_miniatura = None
+
+        if self.pk:
+
+            try:
+                old = ProjectMedia.objects.get(pk=self.pk)
+
+                if old.archivo:
+                    old_archivo = old.archivo.name
+
+                if old.miniatura:
+                    old_miniatura = old.miniatura.name
+
+            except ProjectMedia.DoesNotExist:
+                pass
+
+        super().save(*args, **kwargs)
+
+        # ----------------------------------------------
+        # ELIMINAR ARCHIVO PRINCIPAL SUSTITUIDO
+        # ----------------------------------------------
+
+        if (
+                old_archivo
+                and old_archivo != self.archivo.name
+        ):
+            if not ProjectMedia.objects.filter(
+                    archivo=old_archivo
+            ).exclude(pk=self.pk).exists():
+                default_storage.delete(old_archivo)
+
+        # ----------------------------------------------
+        # ELIMINAR MINIATURA SUSTITUIDA
+        # ----------------------------------------------
+
+        if (
+                old_miniatura
+                and old_miniatura != (
+                self.miniatura.name
+                if self.miniatura
+                else None
+        )
+        ):
+            if not ProjectMedia.objects.filter(
+                    miniatura=old_miniatura
+            ).exclude(pk=self.pk).exists():
+                default_storage.delete(old_miniatura)
+
+
+# ==================================================
+# DELETE FILES WHEN PROJECT MEDIA IS DELETED
+# ==================================================
+
+@receiver(post_delete, sender=ProjectMedia)
+def delete_project_media_files(
+        sender,
+        instance,
+        **kwargs
+):
+    if instance.archivo:
+
+        archivo = instance.archivo.name
+
+        if not sender.objects.filter(
+                archivo=archivo
+        ).exists():
+            default_storage.delete(archivo)
+
+    if instance.miniatura:
+
+        miniatura = instance.miniatura.name
+
+        if not sender.objects.filter(
+                miniatura=miniatura
+        ).exists():
+            default_storage.delete(miniatura)
